@@ -1,0 +1,34 @@
+{
+  "builders": [
+    {
+      "type": "googlecompute",
+      "project_id": "devopsglobalsolutions",
+      "source_image_family": "centos-6",
+      "source_image_project_id": "centos-cloud",
+      "zone": "us-central1-a",
+      "disk_size": "10",
+      "image_name": "hackguard-{{isotime | clean_image_name}}-{{timestamp}}",
+      "image_family": "centos-6",
+      "ssh_username": "scottspangler"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [" sudo yum update -y",
+                      " sudo yum install -y java-1.7.0-openjdk",
+                      " sudo yum install -y httpd",
+                      " sudo yum install -y mysql-devel",
+                      " sudo yum install -y epel-release",
+                      " sudo yum install -y yum-utils",
+                      " sudo yum install -y wget",
+                      " sudo yum install -y nc",
+                      " sudo yum install -y lsof",
+                      " sudo yum install -y traceroute",
+                      " sudo curl -sSO https://dl.google.com/cloudagents/install-logging-agent.sh",
+                      " sudo bash install-logging-agent.sh",
+                      " sudo wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy"
+      ]
+    }
+  ]
+}
